@@ -1,1 +1,13 @@
-{{outlet}}
+<h1 data-id="header-login">LOGIN</h1>
+{{#if error}}
+  <article class="error">
+    <p>{{error.msg}}</p>
+  </article>
+{{/if}}
+<form data-id="login-form">
+  <label data-id="label-name" for="username">Usuario</label>
+  {{input data-id="user-name" name="username" type="text" value=username}}
+  <label data-id="label-pass" for="password">Contraseña</label>
+  {{input data-id="user-pass" name="password" type="password" value=password}}
+  <button data-id="btn-accept" {{action "login" username password}}>Entrar</button>
+</form>
