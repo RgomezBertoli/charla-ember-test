@@ -17,6 +17,7 @@ test('visitamos index', function(assert){
   assert.equal(find('[data-id=label-pass]').text().trim(), 'Contraseña');
   assert.ok(find('#user-pass').length > 0);
   assert.ok(find('[data-id=btn-accept]').length > 0);
+  server.shutdown();
 });
 
 test('Hacemos login con un usuario', function(assert){
@@ -29,7 +30,8 @@ test('Hacemos login con un usuario', function(assert){
   andThen(function(){
     assert.equal(currentURL(), '/home');
     assert.equal(find('[data-id=header-home]').text().trim(), 'HOME');
-  })
+    server.shutdown();
+  });
 });
 
 test('Hacemos login con un usuario pero da error generico', function(assert){
@@ -44,7 +46,9 @@ test('Hacemos login con un usuario pero da error generico', function(assert){
   andThen(function(){
     assert.equal(currentURL(), '/');
     assert.equal(find('[data-id=error-msg]').text().trim(), 'Se ha producido un error');
-  })
+    server.shutdown();
+  });
+
 });
 
 test('Hacemos login con un usuario pero da error especifico', function(assert){
@@ -61,5 +65,6 @@ test('Hacemos login con un usuario pero da error especifico', function(assert){
   andThen(function(){
     assert.equal(currentURL(), '/');
     assert.equal(find('[data-id=error-msg]').text().trim(), 'Usuario no encontrado');
+    server.shutdown();
   })
 });
