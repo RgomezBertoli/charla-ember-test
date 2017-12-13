@@ -9,7 +9,7 @@ export default Controller.extend({
 
   actions: {
     login(username, password){
-
+      this.set('showError', false);
       const body = {
         username,
         password
@@ -25,14 +25,16 @@ export default Controller.extend({
         data: body
       }
 
-      $.ajax(url, hash)
-        .then(() => {
-          this.transitionToRoute('home');
-        })
-        .catch((error) => {
-          this.set('showError', true);
-          this.set('error', error.responseJSON);
-        });
+      hash.error = (error) => {
+        this.set('showError', true);
+        this.set('error', error.responseJSON);
+      };
+
+      hash.success = () => {
+        this.transitionToRoute('home');
+      };
+
+      return $.ajax(url, hash);
     }
   }
 });
