@@ -3,6 +3,10 @@ import $ from 'jquery';
 
 export default Controller.extend({
 
+  error: undefined,
+
+  showError: false,
+
   actions: {
     login(username, password){
 
@@ -26,7 +30,8 @@ export default Controller.extend({
           this.transitionToRoute('home');
         })
         .catch((error) => {
-          this.set('error', error);
+          this.set('showError', true);
+          this.set('error', error.responseJSON);
         });
     }
   }
