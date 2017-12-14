@@ -1,6 +1,9 @@
 module.exports = {
   globals: {
     server: true,
+    clickDataId: true,
+    findDataId: true,
+    getNodeText: true
   },
   root: true,
   parserOptions: {

@@ -11,7 +11,7 @@ test('visitamos index', function(assert){
   assert.expect(7);
 
   assert.equal(currentURL(), '/');
-  assert.equal(find('[data-id=header-login]').text().trim(), 'LOGIN');
+  assert.equal(getNodeText(findDataId('header-login')), 'LOGIN');
   assert.equal(find('[data-id=label-name]').text().trim(), 'Usuario');
   assert.ok(find('#user-name').length > 0);
   assert.equal(find('[data-id=label-pass]').text().trim(), 'Contraseña');
