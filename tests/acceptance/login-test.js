@@ -12,11 +12,11 @@ test('visitamos index', function(assert){
 
   assert.equal(currentURL(), '/');
   assert.equal(getNodeText(findDataId('header-login')), 'LOGIN');
-  assert.equal(find('[data-id=label-name]').text().trim(), 'Usuario');
+  assert.equal(getNodeText(findDataId('label-name')), 'Usuario');
   assert.ok(find('#user-name').length > 0);
-  assert.equal(find('[data-id=label-pass]').text().trim(), 'Contraseña');
+  assert.equal(getNodeText(findDataId('label-pass')), 'Contraseña');
   assert.ok(find('#user-pass').length > 0);
-  assert.ok(find('[data-id=btn-accept]').length > 0);
+  assert.ok(findDataId('btn-accept').length > 0);
   server.shutdown();
 });
 
@@ -25,11 +25,11 @@ test('Hacemos login con un usuario', function(assert){
 
   fillIn('#user-name', 'asdf');
   fillIn('#user-pass', 'asfd1234');
-  click('[data-id=btn-accept]');
+  clickDataId('btn-accept');
 
   andThen(function(){
     assert.equal(currentURL(), '/home');
-    assert.equal(find('[data-id=header-home]').text().trim(), 'HOME');
+    assert.equal(getNodeText(findDataId('header-home')), 'HOME');
     server.shutdown();
   });
 });
@@ -41,11 +41,11 @@ test('Hacemos login con un usuario pero da error generico', function(assert){
 
   fillIn('#user-name', 'asdf');
   fillIn('#user-pass', 'asfd1234');
-  click('[data-id=btn-accept]');
+  clickDataId('btn-accept');
 
   andThen(function(){
     assert.equal(currentURL(), '/');
-    assert.equal(find('[data-id=error-msg]').text().trim(), 'Se ha producido un error');
+    assert.equal(getNodeText(findDataId('error-msg')), 'Se ha producido un error');
     server.shutdown();
   });
 
@@ -60,11 +60,11 @@ test('Hacemos login con un usuario pero da error especifico', function(assert){
 
   fillIn('#user-name', 'asdf');
   fillIn('#user-pass', 'asfd1234');
-  click('[data-id=btn-accept]');
+  clickDataId('btn-accept');
 
   andThen(function(){
     assert.equal(currentURL(), '/');
-    assert.equal(find('[data-id=error-msg]').text().trim(), 'Usuario no encontrado');
+    assert.equal(getNodeText(findDataId('error-msg')), 'Usuario no encontrado');
     server.shutdown();
   })
 });
